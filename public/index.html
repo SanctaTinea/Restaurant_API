@@ -1,10 +1,100 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Ресторан</title>
-</head>
-<body>
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ресторан (ТРВП-008)</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <h1>Ресторан (ТРВП-008)</h1>
 
-</body>
+    <span>Место для сообщений с ошибками</span>
+    <section id="message" class="message" aria-live="polite"></section>
+
+    <main class="columns">
+      <section class="column">
+        <h2>Меню</h2>
+        <button id="refresh-data" type="button">Обновить данные</button>
+
+        <h3>Создать меню</h3>
+        <form id="create-menu-form">
+          <label>
+            День недели (1-7)
+            <input name="dayOfWeek" type="number" min="1" max="7" required />
+          </label>
+          <label>
+            Номер варианта (>=1)
+            <input name="variantNum" type="number" min="1" required />
+          </label>
+          <button type="submit">Создать</button>
+        </form>
+
+        <h3>Список меню</h3>
+        <ul id="menu-list" class="list"></ul>
+
+        <section class="catalog">
+          <h2>Каталог блюд</h2>
+          <button id="refresh-catalog" type="button">Обновить каталог</button>
+
+          <ul id="dish-list" class="list"></ul>
+
+          <h3>Добавить блюдо в каталог</h3>
+          <form id="create-dish-form">
+            <label>
+              Название блюда
+              <input name="name" type="text" required />
+            </label>
+            <label>
+              Тип блюда
+              <select name="typeId" id="dish-type-select" required></select>
+            </label>
+            <button type="submit">Добавить новое блюдо</button>
+          </form>
+        </section>
+
+      </section>
+
+      <section class="column">
+        <div id="menu-editor" class="panel">
+          <h3>Редактировать меню</h3>
+          <form id="edit-menu-form">
+            <label>
+              День недели (1-7)
+              <input name="dayOfWeek" type="number" min="1" max="7" required />
+            </label>
+            <label>
+              Номер варианта (>=1)
+              <input name="variantNum" type="number" min="1" required />
+            </label>
+            <button type="submit">Сохранить</button>
+          </form>
+          <button id="delete-menu" type="button">Удалить меню</button>
+        </div>
+
+        <h2>Блюда выбранного меню</h2>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Название</th>
+              <th>Тип блюда</th>
+              <th>Действия</th>
+            </tr>
+          </thead>
+          <tbody id="menu-dishes"></tbody>
+        </table>
+
+        <h3>Добавить блюдо в меню</h3>
+        <form id="add-dish-form">
+          <label>
+            Давай выберем блюда из списка
+            <select name="dishId" id="add-dish-select" required></select>
+          </label>
+          <button type="submit">добавить</button>
+        </form>
+      </section>
+    </main>
+
+    <script type="module" src="./app.js"></script>
+  </body>
 </html>
