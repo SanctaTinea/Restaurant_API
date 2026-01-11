@@ -11,6 +11,4 @@ app.use("/api/dishTypes", dishTypesRoute);
 app.use("/api/dishes", dishesRoute);
 app.use(express.static("public"));
 
-app.listen(3000, () => {
-    console.log("Server started on port 3000");
-});
+export default app;
