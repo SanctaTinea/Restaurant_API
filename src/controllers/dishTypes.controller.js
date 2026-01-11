@@ -8,6 +8,6 @@ export async function getDishTypes(req, res) {
 
         res.status(200).json(resultDTO);
     } catch (err) {
-        res.status(400).json({ message: err.message });
+        res.status(err.status || 400).json({ message: err.message });
     }
 }
