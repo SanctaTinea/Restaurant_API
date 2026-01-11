@@ -109,7 +109,7 @@ const renderMenuList = (menus, selectedMenuId) => {
     const button = document.createElement("button");
     button.type = "button";
     button.dataset.menuId = menu.id;
-    button.textContent = `${menu.id} | ${menu.dayOfWeek}-${menu.variantNum}`;
+    button.textContent = `${getDayNameRu(menu.dayOfWeek)}-${menu.variantNum}`;
     if (menu.id === selectedMenuId) {
       button.disabled = true;
     }
@@ -135,18 +135,14 @@ const renderMenuDishes = (selectedMenu, menus) => {
   dishes.forEach((dish) => {
     const row = document.createElement("tr");
     row.innerHTML = `
-      <td>${dish.id}</td>
       <td>${dish.name}</td>
       <td>${dish.type.name}</td>
       <td class="actions">
-        <button type="button" data-remove-dish="${dish.id}">Удалить из меню</button>
-        <div>
-          <label>
-            Переместить
-            <select data-move-select="${dish.id}"></select>
-          </label>
-          <button type="button" data-move-dish="${dish.id}">Move</button>
+        <div class="dish-action">
+          <button type="button" data-move-dish="${dish.id}">переместить в</button>
+          <label><select data-move-select="${dish.id}"></select></label>
         </div>
+        <button type="button" data-remove-dish="${dish.id}">удалить из меню</button>
       </td>
     `;
 
@@ -156,7 +152,7 @@ const renderMenuDishes = (selectedMenu, menus) => {
       .forEach((menu) => {
         const option = document.createElement("option");
         option.value = menu.id;
-        option.textContent = `${menu.id} | ${menu.dayOfWeek}-${menu.variantNum}`;
+        option.textContent = `${getDayNameRu(menu.dayOfWeek)}-${menu.variantNum}`;
         select.append(option);
       });
 
@@ -169,7 +165,7 @@ const renderAddDishOptions = (dishes) => {
   dishes.forEach((dish) => {
     const option = document.createElement("option");
     option.value = dish.id;
-    option.textContent = `${dish.id} | ${dish.name} (${dish.type.name})`;
+    option.textContent = `${dish.name} (${dish.type.name})`;
     elements.addDishSelect.append(option);
   });
 };
@@ -179,7 +175,7 @@ const renderDishTypes = (dishTypes) => {
   dishTypes.forEach((type) => {
     const option = document.createElement("option");
     option.value = type.id;
-    option.textContent = `${type.id} | ${type.name}`;
+    option.textContent = `${type.name}`;
     elements.dishTypeSelect.append(option);
   });
 };
@@ -188,11 +184,11 @@ const renderDishCatalog = (dishes) => {
   elements.dishList.innerHTML = "";
   dishes.forEach((dish) => {
     const item = document.createElement("li");
-    item.innerHTML = `${dish.id} | ${dish.name} (${dish.type.name}) `;
+    item.innerHTML = `${dish.name} (${dish.type.name}) `;
     const button = document.createElement("button");
     button.type = "button";
     button.dataset.deleteDish = dish.id;
-    button.textContent = "Delete";
+    button.textContent = "удалить";
     item.append(button);
     elements.dishList.append(item);
   });
@@ -208,3 +204,21 @@ export const render = (state) => {
   renderDishTypes(state.dishTypes);
   renderDishCatalog(state.dishes);
 };
+
+function getDayNameRu(dayNumber) {
+  const days = [
+    "понедельник",
+    "вторник",
+    "среда",
+    "четверг",
+    "пятница",
+    "суббота",
+    "воскресенье"
+  ];
+
+  if (dayNumber < 1 || dayNumber > 7) {
+    throw new Error("Номер дня недели должен быть от 1 до 7");
+  }
+
+  return days[dayNumber - 1];
+}

@@ -36,18 +36,22 @@ h3 {
 }
 
 .message.success {
-  border-color: #2a7a2a;
-  color: #2a7a2a;
+  border-color: #00cd6a;
+  color: #00cd6a;
 }
 
 .message.warn {
-  border-color: #b26b00;
-  color: #b26b00;
+  border-color: #ff0000;
+  color: #ff0000;
 }
 
 .message.error {
-  border-color: #b00020;
-  color: #b00020;
+  border-color: #b000ad;
+  color: #b000ad;
+}
+
+.dish-action {
+  display: flex;
 }
 
 .table {
