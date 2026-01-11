@@ -1,10 +1,99 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Ресторан</title>
-</head>
-<body>
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Business Lunch Menu (ТРВП-008) — Demo</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <h1>Business Lunch Menu (ТРВП-008) — Demo</h1>
 
-</body>
+    <section id="message" class="message" aria-live="polite"></section>
+
+    <main class="columns">
+      <section class="column">
+        <h2>Меню</h2>
+        <button id="refresh-data" type="button">Обновить данные</button>
+
+        <h3>Создать меню</h3>
+        <form id="create-menu-form">
+          <label>
+            dayOfWeek (1..7)
+            <input name="dayOfWeek" type="number" min="1" max="7" required />
+          </label>
+          <label>
+            variantNum (>=1)
+            <input name="variantNum" type="number" min="1" required />
+          </label>
+          <button type="submit">Create</button>
+        </form>
+
+        <h3>Список меню</h3>
+        <ul id="menu-list" class="list"></ul>
+
+        <div id="menu-editor" class="panel">
+          <h3>Редактировать меню</h3>
+          <form id="edit-menu-form">
+            <label>
+              dayOfWeek (1..7)
+              <input name="dayOfWeek" type="number" min="1" max="7" required />
+            </label>
+            <label>
+              variantNum (>=1)
+              <input name="variantNum" type="number" min="1" required />
+            </label>
+            <button type="submit">Save</button>
+          </form>
+          <button id="delete-menu" type="button">Удалить меню</button>
+        </div>
+      </section>
+
+      <section class="column">
+        <h2>Блюда выбранного меню</h2>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="menu-dishes"></tbody>
+        </table>
+
+        <h3>Добавить блюдо в меню</h3>
+        <form id="add-dish-form">
+          <label>
+            Dish
+            <select name="dishId" id="add-dish-select" required></select>
+          </label>
+          <button type="submit">Add</button>
+        </form>
+      </section>
+    </main>
+
+    <section class="catalog">
+      <h2>Каталог блюд</h2>
+      <button id="refresh-catalog" type="button">Обновить каталог</button>
+
+      <ul id="dish-list" class="list"></ul>
+
+      <h3>Добавить блюдо в каталог</h3>
+      <form id="create-dish-form">
+        <label>
+          Name
+          <input name="name" type="text" required />
+        </label>
+        <label>
+          Type
+          <select name="typeId" id="dish-type-select" required></select>
+        </label>
+        <button type="submit">Create</button>
+      </form>
+    </section>
+
+    <script type="module" src="./app.js"></script>
+  </body>
 </html>
